@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o ./k8s/
+    kompose.version: 1.38.0 (a8f5d1cbd)
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: api
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o ./k8s/
+        kompose.version: 1.38.0 (a8f5d1cbd)
+      labels:
+        io.kompose.service: api
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "3000"
+          image: hello-api:latest
+          imagePullPolicy: Never
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - 'fetch(''http://localhost:3000/health'').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))'
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 5
+          name: hello-api
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
