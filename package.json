@@ -1,0 +1,25 @@
+{
+  "name": "hello-name",
+  "version": "1.0.0",
+  "description": "Hello World",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PabloFlores2005/Hello-name.git"
+  },
+  "keywords": [
+    "Hello",
+    "World"
+  ],
+  "author": "Pablo Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloFlores2005/Hello-name/issues"
+  },
+  "homepage": "https://github.com/PabloFlores2005/Hello-name#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
